@@ -26,8 +26,8 @@ public class MainActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-	                String boob = et.getText().toString();
-	                tv.setText(boob);
+	                String text1 = et.getText().toString();
+	                tv.setText(text1);
 
 					
 				}
