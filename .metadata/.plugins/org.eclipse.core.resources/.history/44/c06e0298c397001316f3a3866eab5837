@@ -1,0 +1,65 @@
+package com.example.timetest;
+ 
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+ 
+public class MainActivity extends Activity {
+    Button start, stop;
+    TextView tv;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        start = (Button)findViewById(R.id.start);
+        stop = (Button)findViewById(R.id.stop);
+        tv  = (TextView)findViewById(R.id.tv);
+        tv.setText("10"); // startting from 10.
+ 
+        final MyCounter timer = new MyCounter(10000,1000);
+        start.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.start();
+            }
+        });
+        stop.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+            }
+        });
+    }
+ 
+    public class MyCounter extends CountDownTimer{
+ 
+        public MyCounter(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+ 
+        @Override
+        public void onFinish() {
+            System.out.println("Timer Completed.");
+            start.setText("Timer Completed.");
+        }
+ 
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tv.setText((millisUntilFinished/1000)+"");
+            System.out.println("Timer  : " + (millisUntilFinished/1000));
+            long timeLeft = millisUntilFinished;
+            if (timeLeft == 5000) {
+                System.out.println("5 seconds left");
+                start.setText("5 seconds left");
+            	
+            }
+    }
+
+
+    }}
